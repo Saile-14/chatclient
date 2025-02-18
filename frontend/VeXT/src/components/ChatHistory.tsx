@@ -1,5 +1,6 @@
 
-export const ChatHistory = ({ chatHistory }) => {
+export const ChatHistory = ({ chatHistory  }) => {
+  
   const messages = chatHistory.map((msg, index: number) => (
     <p key={index}>{msg.data}</p>
   ));

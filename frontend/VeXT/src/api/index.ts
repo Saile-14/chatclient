@@ -2,14 +2,16 @@
 
 var socket = new WebSocket("ws://localhost:8080/ws");
 
-let connect = (cb) => {
+type ConnectCallback = (message: MessageEvent) => void;
+
+let connect = (cb:ConnectCallback): void =>  {
     console.log("Trying to connect to websocket!");
 
     socket.onopen = () => {
         console.log("successfully connected to websocket");
     }
 
-    socket.onmessage = msg => {
+    socket.onmessage = (msg: MessageEvent) => {
         console.log(msg.data);
         cb(msg)
     }

@@ -5,10 +5,12 @@ import { Header } from "./components/Header";
 
 function App() {
 
+
   const [chatHistory, setChatHistory] = useState([])
 
-  useEffect(()=> { connect((msg) => {
-    console.log("New message");
+  useEffect(()=> { connect((msg:MessageEvent<string>) => {
+    console.log("New message", msg, msg.data);
+    // @ts-ignore
     setChatHistory((prevHistory) => [...prevHistory, msg])
   })},[])
 

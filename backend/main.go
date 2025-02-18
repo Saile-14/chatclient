@@ -4,16 +4,10 @@ import (
 	"fmt"
 	"log"
 	"net/http"
+	"saile/VeXT/pkg/websocket"
 
 	"github.com/gorilla/websocket"
 )
-
-var upgrader = websocket.Upgrader{
-	ReadBufferSize:  1024,
-	WriteBufferSize: 1024,
-
-	CheckOrigin: func(r *http.Request) bool { return true },
-}
 
 func homePage(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprint(w, "Henloworld111!!!111")
@@ -37,7 +31,7 @@ func reader(conn *websocket.Conn) {
 }
 
 func wsEndpoint(w http.ResponseWriter, r *http.Request) {
-	ws, err := upgrader.Upgrade(w, r, nil)
+	ws, err := websocket.Upgrade(w, r)
 	if err != nil {
 		log.Println(err)
 	}
